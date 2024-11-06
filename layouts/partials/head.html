@@ -5,7 +5,7 @@
   {{ end }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-   {{/* Title logic */}}
+  {{/* Title logic */}}
   {{ if .IsHome -}}
   <title>Merox - IT Blog & Docs</title>
   <meta name="title" content="Merox - IT Blog & Docs" />
@@ -17,7 +17,7 @@
   {{ with (.Params.Summary | default .Params.Description) | default .Site.Params.description -}}
   <meta name="description" content="{{ . }}" />
   {{- end }}
-  {{ with  .Params.Tags | default .Site.Params.keywords -}}
+  {{ with .Params.Tags | default .Site.Params.keywords -}}
   <meta name="keywords" content="{{ range . }}{{ . }}, {{ end -}}" />
   {{- end }}
   {{ with .Site.Params.robots }}
@@ -32,6 +32,7 @@
   <link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink ($.Site.Title | emojify) |
   safeHTML }}
   {{ end -}}
+  
   {{/* Asset bundles */}}
   {{ $assets := newScratch }}
   {{ $cssScheme := resources.Get (printf "css/schemes/%s.css" (.Site.Params.colorScheme | default "blowfish")) }}
@@ -45,14 +46,15 @@
   {{ if $cssCustom }}
   {{ $assets.Add "css" (slice $cssCustom) }}
   {{ end }}
-  {{ $bundleCSS := $assets.Get "css" | resources.Concat "css/main.bundle.css" | resources.Minify | resources.Fingerprint
-  "sha512" }}
-  <link type="text/css" rel="stylesheet" href="{{ $bundleCSS.RelPermalink }}"
-    integrity="{{ $bundleCSS.Data.Integrity }}" />
+  {{ $bundleCSS := $assets.Get "css" | resources.Concat "css/main.bundle.css" | resources.Minify | resources.Fingerprint "sha512" }}
+  <link type="text/css" rel="stylesheet" href="{{ $bundleCSS.RelPermalink }}" media="print" onload="this.media='all'">
+  <noscript><link type="text/css" rel="stylesheet" href="{{ $bundleCSS.RelPermalink }}"></noscript>
+
   {{ $jsAppearance := resources.Get "js/appearance.js" }}
   {{ $jsAppearance = $jsAppearance | resources.ExecuteAsTemplate "js/appearance.js" . | resources.Minify | resources.Fingerprint "sha512" }}
-  <script type="text/javascript" src="{{ $jsAppearance.RelPermalink }}"
+  <script defer type="text/javascript" src="{{ $jsAppearance.RelPermalink }}"
     integrity="{{ $jsAppearance.Data.Integrity }}"></script>
+  
   {{ if .Site.Params.enableSearch | default false }}
   {{ $jsFuse := resources.Get "lib/fuse/fuse.min.js" }}
   {{ $jsSearch := resources.Get "js/search.js" }}
@@ -69,16 +71,16 @@
   {{ $jsMobileMenu := resources.Get "js/mobilemenu.js" }}
   {{ $assets.Add "js" (slice $jsMobileMenu) }}
   {{ if $assets.Get "js" }}
-  {{ $bundleJS := $assets.Get "js" | resources.Concat "js/main.bundle.js" | resources.Minify | resources.Fingerprint
-  "sha512" }}
+  {{ $bundleJS := $assets.Get "js" | resources.Concat "js/main.bundle.js" | resources.Minify | resources.Fingerprint "sha512" }}
   <script defer type="text/javascript" id="script-bundle" src="{{ $bundleJS.RelPermalink }}"
-    integrity="{{ $bundleJS.Data.Integrity }}" data-copy="{{ i18n " code.copy" }}" data-copied="{{ i18n " code.copied"
-    }}"></script>
+    integrity="{{ $bundleJS.Data.Integrity }}" data-copy="{{ i18n " code.copy" }}" data-copied="{{ i18n " code.copied" }}"></script>
   {{ end }}
+  
   {{ if not .Site.Params.disableImageZoom | default true }}
   {{ $zoomJS := resources.Get "lib/zoom/zoom.min.js" | resources.Fingerprint "sha512" }}
-  <script src="{{ $zoomJS.RelPermalink }}" integrity="{{ $zoomJS.Data.Integrity }}"></script>
+  <script defer src="{{ $zoomJS.RelPermalink }}" integrity="{{ $zoomJS.Data.Integrity }}"></script>
   {{ end }}
+
   {{/* Icons */}}
   {{ if templates.Exists "partials/favicons.html" }}
   {{ partialCached "favicons.html" .Site }}
@@ -88,6 +90,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}" />
   <link rel="manifest" href="{{ "site.webmanifest" | relURL }}" />
   {{ end }}
+  
   {{/* Site Verification */}}
   {{ with .Site.Params.verification.google }}
   <meta name="google-site-verification" content="{{ . }}" />
@@ -101,11 +104,13 @@
   {{ with .Site.Params.verification.yandex }}
   <meta name="yandex-verification" content="{{ . }}" />
   {{ end }}
+  
   {{/* Social */}}
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
   {{/* Schema */}}
   {{ partial "schema.html" . }}
+  
   {{/* Me */}}
   {{ with .Site.Params.Author.name }}
   <meta name="author" content="{{ . }}" />{{ end }}
@@ -115,37 +120,41 @@
   <link href="{{ $url }}" rel="me" />{{ end }}
   {{ end }}
   {{ end }}
+  
   {{/* Vendor */}}
   {{ partial "vendor.html" . }}
+  
   {{/* Analytics */}}
   {{ partial "analytics/main.html" .Site }}
+  
   {{/* Extend head - eg. for custom analytics scripts, etc. */}}
   {{ if templates.Exists "partials/extend-head.html" }}
   {{ partialCached "extend-head.html" .Site }}
   {{ end }}
+  
   <meta name="theme-color"/>
+  
   {{/* Firebase */}}
   {{ with $.Site.Params.firebase }}
   {{ if isset $.Site.Params "firebase" }}
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script>
-
-    const firebaseConfig = {
-      apiKey: {{ $.Site.Params.firebase.apiKey }},
-      authDomain: {{ $.Site.Params.firebase.apiKey }},
-      projectId: {{ $.Site.Params.firebase.projectId }},
-      storageBucket: {{ $.Site.Params.firebase.storageBucket }},
-      messagingSenderId: {{ $.Site.Params.firebase.messagingSenderId }},
-      appId: {{ $.Site.Params.firebase.appId }},
-      measurementId: {{ $.Site.Params.firebase.measurementId }}
-    };
-
-    var app = firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
-    var auth = firebase.auth();
-
+    document.addEventListener('DOMContentLoaded', function() {
+      const firebaseConfig = {
+        apiKey: "{{ $.Site.Params.firebase.apiKey }}",
+        authDomain: "{{ $.Site.Params.firebase.authDomain }}",
+        projectId: "{{ $.Site.Params.firebase.projectId }}",
+        storageBucket: "{{ $.Site.Params.firebase.storageBucket }}",
+        messagingSenderId: "{{ $.Site.Params.firebase.messagingSenderId }}",
+        appId: "{{ $.Site.Params.firebase.appId }}",
+        measurementId: "{{ $.Site.Params.firebase.measurementId }}"
+      };
+      var app = firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+      var auth = firebase.auth();
+    });
   </script>
   {{ end }}
   {{ end }}
