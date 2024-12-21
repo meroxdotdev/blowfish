@@ -19,6 +19,7 @@ Blowfish 适宜个高度定制化的主题，使用到了一些 Hugo 中最新�
 ```bash
 npx blowfish-tools
 ```
+
 {{< /alert >}}
 
 > 配置文件是基于 TOML 格式的，这也是 Hugo 默认支持的语法。当然如果你愿意，也可以将配置转换成 YAML 或 JSON 格式。
@@ -83,6 +84,7 @@ Blowfish 主题目前默认支持了以下语言：
 | Italian                      | `it`    |
 | Japanese                     | `ja`    |
 | Korean                       | `ko`    |
+| Dutch                        | `nl`    |
 | Polish                       | `pl`    |
 | Portuguese (Brazil)          | `pt-br` |
 | Portuguese (Portugal)        | `pt-pt` |
@@ -92,7 +94,6 @@ Blowfish 主题目前默认支持了以下语言：
 | Vietnamese                   | `vi`    |
 | Simplified Chinese (China)   | `zh-cn` |
 | Traditional Chinese (Taiwan) | `zh-tw` |
-
 
 组件和静态资源的默认翻译在 `i18n/[code].yaml` 文件中，当然如果你想自定义，覆盖对应的文件即可。你也可以使用这种方法添加新的语言。如果你想与社区分享心得翻译，请[提交PR](https://github.com/nunocoracao/blowfish/pulls)。
 
@@ -105,7 +106,6 @@ Blowfish 主题目前默认支持了以下语言：
 {{< alert >}}
 **注意：** 保证 [网站设置](#site-configuration) 中的 `defaultContentLanguage`参数和你提供的语言配置文件相匹配。
 {{< /alert >}}
-
 
 #### 全局
 
@@ -132,10 +132,10 @@ Blowfish 主题目前默认支持了以下语言：
 | `params.description`   | 无                 | 网站表述。此参数将会被用作站点元数据。                                                                                                                                                                                         |
 | `params.copyright`     | 无                 | 此参数是一个 Markdown，用于网站页脚的版权声明。此参数可以包含占位符 { year } ，以此动态插入当前年份。 如果没有提供，Blowfish 将会使用网站 `title` 自动生成版权信息。                                                           |
 
-
 <!-- prettier-ignore-end -->
 
 #### 作者
+
 | 名称              | 默认值 | 描述                                                                                                                                                                                 |
 | ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `author.name`     | 无     | 作者名。此参数将展示在文章页脚。并且如果主页使用了个人资料布局，也会展示此值。                                                                                                       |
@@ -245,7 +245,7 @@ Blowfish 提供了大量控制主题功能的配置参数，下面的表格中�
 | `article.showAuthorsBadges`           | `false` | 是否在文章或列表中显示 `authors` 分类。这需要开启多个作者 `multiple authors` 和 `authors` 分类法。 请阅读 [这个网页]({{< ref "multi-author" >}}) 来获取更多内容。                                                                                            |
 | `article.showWordCount`               | `false` | 是否显示文章的字数。 如果你的语言属于 CJK 语言，需要在 `config.toml` 中开启 `hasCJKLanguage` 参数。                                                                                                                                                          |
 | `article.showComments`                | `false` | 是否在文章末尾添加 [评论部分]({{< ref "partials#comments" >}})。                                                                                                                                                                                             |
-| `article.sharingLinks`                | 无      | 在文章末尾显示的分享链接。如果没有提供或设置为 `false`，则不会显示任何分享链接。可用的值包括："linkedin"、"twitter"、"reddit"、"pinterest"、"facebook"、"email"、"whatsapp" 和 "telegram"                                                                    |
+| `article.sharingLinks`                | 无      | 在文章末尾显示的分享链接。如果没有提供或设置为 `false`，则不会显示任何分享链接。可用的值包括："linkedin"、"bluesky"、"mastodon"、"twitter"、"reddit"、"pinterest"、"facebook"、"email"、"whatsapp" 和 "telegram"                                                                    |
 | `article.showZenMode`                 | `false` | 指定是否激活文章阅读的禅模式，即隐藏常规的界面元素。                                                                                                                                                                                                         |
 
 ### 列表页
@@ -273,7 +273,7 @@ Blowfish 提供了大量控制主题功能的配置参数，下面的表格中�
 | ----------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `sitemap.excludedKinds` | `["taxonomy", "term"]` | 从生成的 `/sitemap.xml` 文件中排除的内容。 具体的配置请参考[Hugo 文档](https://gohugo.io/templates/section-templates/#page-kinds)。 |
 
-### 分类法 
+### 分类法
 
 | 名称                           | 默认值  | 描述                                                                                      |
 | ------------------------------ | ------- | ----------------------------------------------------------------------------------------- |
@@ -326,6 +326,7 @@ Blowfish 提供了大量控制主题功能的配置参数，下面的表格中�
 | `umamiAnalytics.websiteid`   | 无         | 支持 Umami 站点分析平台。更多详细内容请参考 [分析文档]({{< ref "partials#analytics" >}})。                 |
 | `umamiAnalytics.domain`      | 无 | 如果使用自定义域名的 Umami Analytics，请在此提供，以便从自定义域名获取 `script.js`。                            |
 | `umamiAnalytics.dataDomains` | 无 | 如果你只想在特别的数个域名中使用 tracker 功能，那么你需要设置它。这个参数的值是逗号分隔的域名列表，如：yoursite.com,yoursite2.com。 |
+| `umamiAnalytics.scriptName` | script.js | 用于反广告屏蔽的 script.js 名称，由环境变量 `TRACKER_SCRIPT_NAME` 配置。 |
 | `umamiAnalytics.enableTrackEvent` | true      | 默认会自动添加 Umami Track Event。如果你不想添加 Event，那学需要设置为 `false`。                            |
 
 ### Seline Analytics
@@ -334,7 +335,6 @@ Blowfish 提供了大量控制主题功能的配置参数，下面的表格中�
 |-----------------------------------|---------|--------------------------------------------------------------------------|
 | `selineAnalytics.token`           | 无 | Seline 站点分析平台的 token。更多详细内容请参考 [分析文档]({{< ref "partials#analytics" >}})。 |
 | `selineAnalytics.enableTrackEvent` | true    | 默认会自动添加 Umami Track Event。如果你不想添加 Event，那学需要设置为 `false`。                 |
-
 
 ### BuyMeACoffee(赞助平台)
 
@@ -345,6 +345,7 @@ Blowfish 提供了大量控制主题功能的配置参数，下面的表格中�
 | `buymeacoffee.globalWidgetMessage`  | 无     | 新用户首次访问网站时显示的消息。   |
 | `buymeacoffee.globalWidgetColor`    | 无     | 组件颜色，使用 HEX 格式。          |
 | `buymeacoffee.globalWidgetPosition` | 无     | 组件位置，例如 "Left" 或 "Right"。 |
+
 ### 验证
 
 | 名称                     | 默认值 | 描述                                                     |
@@ -354,6 +355,14 @@ Blowfish 提供了大量控制主题功能的配置参数，下面的表格中�
 | `verification.pinterest` | 无     | Pinterest 提供的网站验证字符串，用于在网站元数据中包含。 |
 | `verification.yandex`    | 无     | Yandex 提供的网站验证字符串，用于在网站元数据中包含。    |
 <!-- prettier-ignore-end -->
+
+## RSSNext
+
+| Name                     | Default   | Description                                                                                 |
+| ------------------------ | --------- |---------------------------------------------------------------------------------------------|
+| `rssnext.feedId`    | _Not set_ | [RSSNext/Follow](https://follow.is) 提供的 `feeId`，这将被自动添加在 `rss.xml` 中以便完成订阅源所有权验证，证明该源属于你自己。 |
+| `rssnext.userId`      | _Not set_ | [RSSNext/Follow](https://follow.is) 提供的 `userId`，这将被自动添加在 `rss.xml` 中以便完成订阅源所有权验证，证明该源属于你自己      |
+
 
 ## 别的配置文件
 
