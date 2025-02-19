@@ -26,7 +26,7 @@
     {{/* Copyright */}}
     {{ if .Site.Params.footer.showCopyright | default true }}
     <p class="text-sm text-neutral-500 dark:text-neutral-400"> 
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0.0</a>
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
       {{- with replace .Site.Params.copyright "{ year }" now.Year  }}
       {{ . | markdownify }}
       {{- else }}
