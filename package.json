@@ -1,6 +1,10 @@
 {
   "name": "hugo-blowfish-theme",
+<<<<<<< HEAD
   "version": "2.83.0",
+=======
+  "version": "2.84.0",
+>>>>>>> d338f91a (up)
   "description": "Blowfish theme for Hugo.",
   "scripts": {
     "postinstall": "vendor-copy",
