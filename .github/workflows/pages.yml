@@ -59,7 +59,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: https://github.com/mer0x/merox.dev/tree/gh-pages
+      url: https://github.com/mer0x/source.merox.dev
     runs-on: ubuntu-latest
     needs: build
     steps:
