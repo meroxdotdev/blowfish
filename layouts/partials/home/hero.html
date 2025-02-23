@@ -1,5 +1,6 @@
 {{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
 <article class="max-w-full prose dark:prose-invert">
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
     <div class="relative">
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
         <div class="mx-auto max-w-7xl p-0">
@@ -48,9 +49,31 @@
                     </h1>
                     {{ with .Site.Params.Author.headline }}
                     <h2 class="mt-0 mb-0 text-xl text-neutral-300">
-                        {{ . | markdownify }}
+                        <span>A passionate </span>
+                        <!--<span class="text-neutral-300">System </span>-->
+                        <span id="typing-text"></span>
                     </h2>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            new TypeIt('#typing-text', {
+                                speed: 100,
+                                waitUntilVisible: true,
+                                lifeLike: true,
+                                loop: false,
+                                html: true,
+                                cursorChar: "_" // Setează cursorul orizontal
+                            })
+                            .type('<span class="gradient-text">Sysadmin</span>')
+                            .pause(2000)
+                            .delete(8)
+                            .type('<span class="gradient-text">Blogger</span>✍️')
+                            .pause(2000)
+                            .go();
+                        });
+                    </script>
                     {{ end }}
+                    
                     <div class="mt-3 mb-10 text-2xl">
                         {{ with .Site.Params.Author.links }}
                         <div class="flex flex-wrap">
