@@ -28,6 +28,7 @@ Blowfish はいくつもの [FontAwesome 6](https://fontawesome.com/icons) の�
 | check                | {{< icon check >}}                |
 | circle-info          | {{< icon circle-info >}}          |
 | code                 | {{< icon code>}}                  |
+| codeberg             | {{< icon codeberg >}}             |
 | codepen              | {{< icon codepen >}}              |
 | comment              | {{< icon comment >}}              |
 | dev                  | {{< icon dev >}}                  |
@@ -65,6 +66,7 @@ Blowfish はいくつもの [FontAwesome 6](https://fontawesome.com/icons) の�
 | language             | {{< icon language >}}             |
 | lastfm               | {{< icon lastfm >}}               |
 | lightbulb            | {{< icon lightbulb >}}            |
+| line                 | {{< icon line >}}                 |
 | link                 | {{< icon link >}}                 |
 | linkedin             | {{< icon linkedin >}}             |
 | list                 | {{< icon list >}}                 |
@@ -79,10 +81,12 @@ Blowfish はいくつもの [FontAwesome 6](https://fontawesome.com/icons) の�
 | orcid                | {{< icon orcid >}}                |
 | patreon              | {{< icon patreon >}}              |
 | paypal               | {{< icon paypal >}}               |
+| peertube             | {{< icon peertube >}}             |
 | pencil               | {{< icon pencil >}}               |
 | pgpkey               | {{< icon pgpkey >}}               |
 | phone                | {{< icon phone >}}                |
 | pinterest            | {{< icon pinterest >}}            |
+| pixelfed             | {{< icon pixelfed >}}             |
 | poo                  | {{< icon poo >}}                  |
 | reddit               | {{< icon reddit >}}               |
 | researchgate         | {{< icon researchgate >}}         |
@@ -116,4 +120,3 @@ Blowfish はいくつもの [FontAwesome 6](https://fontawesome.com/icons) の�
 | xing                 | {{< icon xing >}}                 |
 | xmark                | {{< icon xmark >}}                |
 | youtube              | {{< icon youtube >}}              |
-| codeberg             | {{< icon codeberg >}}             |

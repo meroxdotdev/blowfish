@@ -1,4 +1,5 @@
 {{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
+{{ $disableHeroImageFilter := .Site.Params.homepage.disableHeroImageFilter | default false }}
 <article class="max-w-full prose dark:prose-invert">
     <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
     <div class="relative">
@@ -94,5 +95,5 @@
     </div>
 </article>
 <section>
-    {{ partial "recent-articles/main.html" . }}
+  {{ partial "recent-articles/main.html" . }}
 </section>
